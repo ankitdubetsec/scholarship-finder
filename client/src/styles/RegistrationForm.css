@@ -1,0 +1,143 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+.registration-form {
+    margin: 0; 
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+   width: 90%;
+   padding: 30px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ .title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .title h1{
+    font-weight: bold;
+  }
+  /* .title img{
+    height: 60px;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    
+
+  } */
+  .registration-form .part1{
+    display: flex;
+    justify-content: space-around;
+    flex-direction:row;
+    padding-top: 10px;
+  }
+
+  .horizontal-line {
+    border-bottom: 2px solid #00a76c;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    color: rgb(1, 60, 10);
+    padding-bottom: 30px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items:center
+    
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight:normal;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="date"],
+  textarea {
+
+    margin-bottom: 15px;
+   color: #00a76c;
+    border-radius: 3px;
+    border: 1px solid #00a76c;
+    padding: 10px;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  button {
+    background-color: #00a76c;
+    color: white;
+    font-size: 20px;
+    /* letter-spacing: 5px; */
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    
+  }
+  
+  .form-buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    padding-left: 20px;
+    
+  }
+
+  button:hover {
+    background-color: whitesmoke;
+    color: #00a76c;
+    border: 1px solid #00a76c;
+  }
+
+  .form-buttons .clear:hover{
+    background-color: whitesmoke;
+    color: red;
+    border: 1px solid red ;
+  }
+  .form-buttons .clear{
+    background-color: red;
+    color: white;
+    border: none;
+  }
+ 
+  div label {
+    display: inline-block;
+    margin-right: 10px;
+    
+  }
+
+  div button{
+        display: inline-block;
+        margin-right: 10px;   
+        /* box-shadow: 0 4dvb 4px rgba(0, 0, 0, 0.1); */
+  }
+
+ 
