@@ -31,7 +31,7 @@ router.get('/admindata',async (req, res) => {
         const notes= await Note.find({});
         res.status(200).json({note:notes})
     } catch (error) {
-        res.status(500).json({msg:"an error occured"})
+        res.status(500).json(error)
     }
 })
 router.get('/admindata/:id',async (req, res) => {
