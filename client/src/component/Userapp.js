@@ -1,7 +1,7 @@
 // import './App.css';
 import './style.css';
 import User from './User'
-// import Card from './Card';
+import Card from './Card';
 import React from "react"
 function Userapp() {
     const [sch, setsch] = React.useState({})
