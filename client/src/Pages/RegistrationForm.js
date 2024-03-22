@@ -36,7 +36,7 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/createstudent`, {
+      const response = await fetch(`https://scholarship-find.onrender.com/api/auth/createstudent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

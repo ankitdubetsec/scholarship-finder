@@ -28,7 +28,7 @@ function App() {
     console.log("rendered");
 
     axios
-      .get('http://localhost:5000/api/admin/admingetdata')
+      .get('https://scholarship-find.onrender.com/api/admin/admingetdata')
       .then((res) => {
       //  console.log(res.data);
         setuser(res.data.note);

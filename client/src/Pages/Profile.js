@@ -37,7 +37,7 @@ console.log(studentid); // Output: @abc
         async function fetchData() {
             try {
                 // API call.
-                const response = await fetch(`http://localhost:5000/api/auth/getstudent/${studentid}`, {
+                const response = await fetch(`https://scholarship-find.onrender.com/api/auth/getstudent/${studentid}`, {
                     method: "POST",
                     // headers: {
                     //     "Content-Type": "application/json",

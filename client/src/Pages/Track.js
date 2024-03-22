@@ -11,7 +11,7 @@ export default function Notification(props) {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/api/admin/admindata`)
+            .get(`https://scholarship-find.onrender.com/api/admin/admindata`)
             .then((res) => {
                 setsch(res.data.note);
             })
