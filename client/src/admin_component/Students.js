@@ -27,7 +27,7 @@ export default function Students(props)  {
         x="Applied"
        }
         try {
-          const response=await axios.patch(`http://localhost:5000/api/admin/admindata/${id}`,{status:x});
+          const response=await axios.patch(`https://scholarship-find.onrender.com/api/admin/admindata/${id}`,{status:x});
           const updatedNote = response.data;
             
             // Update the state of notes by mapping over the existing array

@@ -8,7 +8,7 @@ function Card(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/scholorship/fetchscholorship", {
+        const response = await fetch("https://scholarship-find.onrender.com/api/scholorship/fetchscholorship", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -26,7 +26,7 @@ function Card(props) {
 
   const handleSubmit = async (title) => {
     try {
-      await axios.post('http://localhost:5000/api/admin/admindata', {
+      await axios.post('https://scholarship-find.onrender.com/api/admin/admindata', {
         schname: title,
         student: props.userr._id,
         name: props.userr.name,

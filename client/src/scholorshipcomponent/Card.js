@@ -6,7 +6,7 @@ function Card(props) {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5000/api/scholorship/fetchscholorship`, {
+        const response = await fetch(`https://scholarship-find.onrender.com/api/scholorship/fetchscholorship`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

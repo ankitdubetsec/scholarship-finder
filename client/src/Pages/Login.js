@@ -19,7 +19,7 @@ const Login = (props) => {
     // inputRef.current.focus();
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/loginstudent`, {
+      const response = await fetch(`https://scholarship-find.onrender.com/api/auth/loginstudent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
