@@ -1,3 +1,3 @@
 # scholarship-finder
-live link : https://scholarship-finder-15.onrender.com/
+live link : https://65ff19ae159c7f32e5cec385--sunny-pasca-b73dfd.netlify.app/
 
