@@ -38,7 +38,7 @@ export default function Profile(props) {
       try {
         // API call.
         const response = await fetch(
-          `http://localhost:5000/api/auth/getstudent/${studentid}`,
+          `https://scholarship-finder-updated.onrender.com/api/auth/getstudent/${studentid}`,
           {
             method: "POST",
             // headers: {

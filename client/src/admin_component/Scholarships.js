@@ -39,7 +39,9 @@ export default function Scholarships(props) {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/api/scholorship/fetchscholorship`)
+      .post(
+        `https://scholarship-finder-updated.onrender.com/api/scholorship/fetchscholorship`
+      )
       .then((res) => {
         setsch(res.data.scholorship);
       })
@@ -53,7 +55,7 @@ export default function Scholarships(props) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/scholorship/deletescholorship/${id}`,
+        `https://scholarship-finder-updated.onrender.com/api/scholorship/deletescholorship/${id}`,
         {
           method: "DELETE",
           headers: {

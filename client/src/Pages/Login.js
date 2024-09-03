@@ -24,7 +24,7 @@ const Login = (props) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/loginstudent`,
+        `https://scholarship-finder-updated.onrender.com/api/auth/loginstudent`,
         {
           method: "POST",
           headers: {

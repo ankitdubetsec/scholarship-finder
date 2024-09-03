@@ -22,7 +22,7 @@ function Userapp() {
     () => async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/scholorship/fetchscholorship`,
+          `https://scholarship-finder-updated.onrender.com/api/scholorship/fetchscholorship`,
           {
             method: "POST",
             headers: {

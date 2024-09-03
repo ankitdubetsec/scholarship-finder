@@ -20,12 +20,15 @@ export default function Students(props) {
   useEffect(() => {
     if (providerId) {
       axios
-        .get(`http://localhost:5000/api/admin/admingetdata/${providerId}`, {
-          headers: {
-            "auth-token": localStorage.getItem("admintoken"),
-            "Content-Type": "application/json",
-          },
-        })
+        .get(
+          `https://scholarship-finder-updated.onrender.com/api/admin/admingetdata/${providerId}`,
+          {
+            headers: {
+              "auth-token": localStorage.getItem("admintoken"),
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           setUserr(res.data.note);
           setLoading(false);
@@ -41,7 +44,7 @@ export default function Students(props) {
     let newStatus = stat === "Applied" ? "Accepted" : "Applied";
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/admin/admindata/${id}`,
+        `https://scholarship-finder-updated.onrender.com/api/admin/admindata/${id}`,
         { status: newStatus }
       );
       const updatedNote = response.data.noteupdated;

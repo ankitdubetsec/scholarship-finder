@@ -12,7 +12,7 @@ function User(props) {
       try {
         // API call.
         const response = await fetch(
-          `http://localhost:5000/api/auth/getstudent`,
+          `https://scholarship-finder-updated.onrender.com/api/auth/getstudent`,
           {
             method: "POST",
             headers: {

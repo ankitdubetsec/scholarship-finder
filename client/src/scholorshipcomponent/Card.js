@@ -10,7 +10,7 @@ function Card(props) {
     const fetchFilteredScholarships = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/scholorship/filter",
+          "https://scholarship-finder-updated.onrender.com/api/scholorship/filter",
           { params: props.filters }
         );
         setsch(response.data);
@@ -18,7 +18,7 @@ function Card(props) {
         console.log(response.data);
 
         const appliedResponse = await axios.get(
-          `http://localhost:5000/api/admin/admingetdata/${props.userr._id}`,
+          `https://scholarship-finder-updated.onrender.com/api/admin/admingetdata/${props.userr._id}`,
           {
             headers: {
               "auth-token": localStorage.getItem("admintoken"),
@@ -43,22 +43,25 @@ function Card(props) {
   const handleSubmit = async (title, provId, id) => {
     console.log("prop:", props);
     try {
-      await axios.post("http://localhost:5000/api/admin/admindata", {
-        schname: title,
-        student: props.user._id,
-        name: props.user.name,
-        mobile: props.user.mobile,
-        date_of_birth: props.user.date_of_birth,
-        address: props.user.address,
-        country: props.user.country,
-        gender: props.user.gender,
-        college_name: props.user.college_name,
-        uid: props.user.uid,
-        cgpa: props.user.cgpa,
-        degree: props.user.degree,
-        status: "Applied",
-        provider: provId ? provId : null,
-      });
+      await axios.post(
+        "https://scholarship-finder-updated.onrender.com/api/admin/admindata",
+        {
+          schname: title,
+          student: props.user._id,
+          name: props.user.name,
+          mobile: props.user.mobile,
+          date_of_birth: props.user.date_of_birth,
+          address: props.user.address,
+          country: props.user.country,
+          gender: props.user.gender,
+          college_name: props.user.college_name,
+          uid: props.user.uid,
+          cgpa: props.user.cgpa,
+          degree: props.user.degree,
+          status: "Applied",
+          provider: provId ? provId : null,
+        }
+      );
       console.log("Posted successfully");
 
       // Update the appliedScholarships state

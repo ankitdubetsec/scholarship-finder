@@ -24,7 +24,7 @@ const Adminlogin = (props) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/Adminlogin`,
+        `https://scholarship-finder-updated.onrender.com/api/auth/Adminlogin`,
         {
           method: "POST",
           headers: {

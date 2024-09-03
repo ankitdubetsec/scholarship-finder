@@ -11,12 +11,15 @@ export default function Notification(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/admin/admindata`, {
-        headers: {
-          "auth-token": localStorage.getItem("admintoken"),
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://scholarship-finder-updated.onrender.com/api/admin/admindata`,
+        {
+          headers: {
+            "auth-token": localStorage.getItem("admintoken"),
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         setsch(res.data.note);
       })

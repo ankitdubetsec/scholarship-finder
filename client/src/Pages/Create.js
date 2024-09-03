@@ -37,7 +37,7 @@ function Create() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/scholorship/createscholorship`,
+        `https://scholarship-finder-updated.onrender.com/api/scholorship/createscholorship`,
         {
           method: "POST",
           headers: {
