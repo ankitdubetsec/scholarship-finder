@@ -1,32 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './cardstyle.css'
-
+import "./cardstyle.css";
+import "./loading.css";
 function Card(props) {
-  const [sch, setsch] = useState({});
+  const [scholarships, setScholarships] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [appliedScholarships, setAppliedScholarships] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://scholarship-find.onrender.com/api/scholorship/fetchscholorship", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
+        const response = await fetch(
+          "https://scholarship-find.onrender.com/api/scholorship/fetchscholorship",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        });
+        );
         const json = await response.json();
-        setsch(json);
+        setScholarships(json.scholorship);
+        setLoading(false);
+        // Fetch applied scholarships for the current user
+        const appliedResponse = await axios.get(
+          `http://localhost:5000/api/admin/admingetdata/${props.userr._id}`,
+          {
+            headers: {
+              "auth-token": localStorage.getItem("admintoken"),
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const appliedData = appliedResponse.data.note.reduce((acc, curr) => {
+          acc[curr.schname] = curr.status;
+          return acc;
+        }, {});
+        setAppliedScholarships(appliedData);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [props.userr._id]);
 
-  const handleSubmit = async (title) => {
+  const handleSubmit = async (title, provId, id) => {
+    console.log("prop:", props);
     try {
-      await axios.post('https://scholarship-find.onrender.com/api/admin/admindata', {
+      await axios.post("http://localhost:5000/api/admin/admindata", {
         schname: title,
         student: props.userr._id,
         name: props.userr.name,
@@ -40,27 +62,56 @@ function Card(props) {
         cgpa: props.userr.cgpa,
         degree: props.userr.degree,
         status: "Applied",
+        provider: provId ? provId : null,
       });
       console.log("Posted successfully");
+
+      // Update the appliedScholarships state
+      setAppliedScholarships((prev) => ({
+        ...prev,
+        [title]: "Applied",
+      }));
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const cardss = sch.scholorship ? sch.scholorship.map((element) => (
+  const cardss = scholarships.map((element) => (
     <div key={element._id} className="card">
       <div className="card-title">{element.title}</div>
       <div className="card-details">
-        <div>Deadline: <span>{element.date}</span></div>
-        <div>Funds: <span>{element.funds}</span></div>
-        <div><i className="fa-solid fa-location-dot"></i> {element.location}</div>
-        <button onClick={() => handleSubmit(element.title)}>
-          {props.user.status && element._id === props.user.key ? "Accepted" : "Apply Now"}
+        <div style={{ paddingBottom: "5px" }}>
+          Deadline: <span>{element.date}</span>
+        </div>
+        <div style={{ paddingBottom: "5px" }}>
+          Funds: <span>{element.funds}</span>
+        </div>
+        <div style={{ paddingBottom: "5px" }}>
+          <i className="fa-solid fa-location-dot"></i> {element.location}
+        </div>
+        <button
+          onClick={() =>
+            handleSubmit(element.title, element.provider, element._id)
+          }
+          style={{ position: "relative", left: "700px" }}
+        >
+          {appliedScholarships[element.title] === "Applied"
+            ? "Applied"
+            : appliedScholarships[element.title] === "Accepted"
+            ? "Accepted"
+            : "Apply Now"}
         </button>
       </div>
     </div>
-  )) : null;
+  ));
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
   return <div className="card-container">{cardss}</div>;
 }
 

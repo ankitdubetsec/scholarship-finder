@@ -1,98 +1,102 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Profile from "../Pages/Profile";
-import axios from 'axios';
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-export default function Students(props)  {
-    // console.log(props.userdata.name)
-    const dataToPass = { name: 'John Doe', age: 25 };
-    let [val,setval]=React.useState("");
-    //profprop={profprop}
-    //setprofprop={setprofprop}
-    // function handlestatus(id,name){
-    //     console.log(id)
-    //     console.log(name)
+export default function Students(props) {
+  const [providerId, setProviderId] = useState("");
+  const [userr, setUserr] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    // }
-    const handlestatus=async(id,stat)=>{
-        // const title2=prompt("enter new title")
-        // const content2=prompt("enter new content")
-        // const completed2=prompt("completed?")
-        
-       let x;
-       if(stat=="Applied"){
-        x="Accepted"
-       }
-       else if(stat=="Accepted"){
-        x="Applied"
-       }
-        try {
-          const response=await axios.patch(`https://scholarship-find.onrender.com/api/admin/admindata/${id}`,{status:x});
-          const updatedNote = response.data;
-            
-            // Update the state of notes by mapping over the existing array
-            // If the task ID matches the updated note, replace it with the updated note
-            // Otherwise, keep the task as it is
-            //setNotes(notes.map(task => task._id === props.id ? updatedNote : data));
-          //setNotes();
-        } catch (error) {
-          console.error('Error deleting task:', error);
-        }
-        console.log("update function")
-      }
-   
-    function handleprofile(){
-        setval(prev=>!prev)
+  useEffect(() => {
+    const token = localStorage.getItem("admintoken");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      // console.log(decodedToken);
+      setProviderId(decodedToken.admin.id);
     }
-    console.log("student")
-    console.log(props.userr)
-  return (
-  
-    <div>
-      <table class="styled-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Profile</th>
-                <th>Course</th>
-                <th>Scholarship Name</th>
-                <th>GPA</th>
-                <th>Contact</th>
-                <th>Action</th>
-                <th>status</th>
-            </tr>
-        </thead>
-        
-            {props.userr.map((dat)=>{
-                // props.setprofprop(dat.schname);
-               // setval(dat.status)
-                return(
-                    <tbody>
-                        <tr>
-                        <td>{dat.name}</td>
-                        <td>
-                       {/* <Link to={'/profile'} ><button>profile</button></Link> */}
-                       {/* <a href='./profile'>faf</a> */}
-                       <a href={`/profile?name=${dat.student}`}><button>profile</button></a>
-                            </td>
-                        <td>{dat.degree}</td>
-                        
-                        <td>{dat.schname}</td>
-                        <td>{dat.cgpa}</td>
-                        <td>{dat.mobile}</td>
-                        <td><button onClick={()=>handlestatus(dat._id,dat.status)}>{dat.status === "Accepted" ? "Accepted" : "Accept"}</button></td>
-                        </tr>
-                
-                
-                </tbody>
-            
-            )})}
+  }, []);
 
-            
-          
-        
-    </table>
-    {/* {val&&<Profile data={val}/>} */}
+  useEffect(() => {
+    if (providerId) {
+      axios
+        .get(`http://localhost:5000/api/admin/admingetdata/${providerId}`, {
+          headers: {
+            "auth-token": localStorage.getItem("admintoken"),
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          setUserr(res.data.note);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+          setLoading(false);
+        });
+    }
+  }, [providerId]);
+
+  const handlestatus = async (id, stat) => {
+    let newStatus = stat === "Applied" ? "Accepted" : "Applied";
+    try {
+      const response = await axios.patch(
+        `http://localhost:5000/api/admin/admindata/${id}`,
+        { status: newStatus }
+      );
+      const updatedNote = response.data.noteupdated;
+
+      setUserr((prevUserr) =>
+        prevUserr.map((note) =>
+          note._id === id ? { ...note, status: newStatus } : note
+        )
+      );
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <table className="styled-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profile</th>
+            <th>Course</th>
+            <th>Scholarship Name</th>
+            <th>GPA</th>
+            <th>Contact</th>
+            <th>Action</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userr.map((dat) => (
+            <tr key={dat._id}>
+              <td>{dat.name}</td>
+              <td>
+                <Link to={`/profile?name=${dat.student}`}>
+                  <button>Profile</button>
+                </Link>
+              </td>
+              <td>{dat.degree}</td>
+              <td>{dat.schname}</td>
+              <td>{dat.cgpa}</td>
+              <td>{dat.mobile}</td>
+              <td>
+                <button onClick={() => handlestatus(dat._id, dat.status)}>
+                  {dat.status === "Accepted" ? "Accepted" : "Accept"}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }

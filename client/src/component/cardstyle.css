@@ -1,34 +1,101 @@
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-  
-  .card {
-    width: calc(33.33% - 15px); /* Adjust width as per your requirement */
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 15px;
-  }
-  
-  .card-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .card-details {
-    font-size: 14px;
-  }
-  
-  .card-details > div {
-    margin-bottom: 5px;
-  }
-  
-  .card-details > div > span {
-    font-weight: bold;
-  }
-  
-  .card button {
-    padding: 12px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.company-name {
+  background-color: #f1f3f5;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.detail-item i {
+  color: #007bff;
+}
+
+.job-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.apply-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+  background-color: #0056b3;
+}
+
+.apply-button.Applied {
+  background-color: #28a745;
+}
+
+.apply-button.Accepted {
+  background-color: #17a2b8;
+}

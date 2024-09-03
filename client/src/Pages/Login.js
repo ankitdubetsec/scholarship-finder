@@ -77,6 +77,7 @@ const Login = (props) => {
           <button style={{ 'borderRadius': '10px', 'padding': '15px' }} type='submit'>Submit</button>
           {/* </div> */}
         </form>
+        
 
         <div className='sideimg'>
           <img style={{ 'width': '400px', 'height': '400px', 'marginRight': '120px' }} src={SideImg}></img>
