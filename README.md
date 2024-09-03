@@ -1,3 +1,3 @@
 # scholarship-finder
-live link : https://65ff19ae159c7f32e5cec385--sunny-pasca-b73dfd.netlify.app/
+live link : https://66d6c7b574bd9ddd110c19c0--endearing-rugelach-d5a71c.netlify.app/
 
