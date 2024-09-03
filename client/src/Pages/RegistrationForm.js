@@ -1,80 +1,83 @@
 // RegistrationForm.js
-import React, { useState } from 'react';
-import '../styles/RegistrationForm.css';
+import React, { useState } from "react";
+import "../styles/RegistrationForm.css";
 import logo from "../images/form.png";
-import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer';
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const RegistrationForm = () => {
-
   let navigate = useNavigate();
 
   // SIGNUP API.
   const [signupCredentials, setSignupCredentials] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
     // ageGroup: '',
-    mobile: '',
-    address: '',
-    date_of_birth: '',
-    country: '', // Use a dropdown for the country
-    gender: 'male',
-    college_name: '',
-    uid: '',
-    cgpa: '',
-    degree: '',
+    mobile: "",
+    address: "",
+    date_of_birth: "",
+    country: "", // Use a dropdown for the country
+    gender: "male",
+    college_name: "",
+    uid: "",
+    cgpa: "",
+    degree: "",
     resume: null,
-
   });
   const onChange = (e) => {
-    setSignupCredentials({ ...signupCredentials, [e.target.name]: e.target.value });
-  }
+    setSignupCredentials({
+      ...signupCredentials,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://scholarship-find.onrender.com/api/auth/createstudent`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: signupCredentials.name,
-          email: signupCredentials.email,
-          mobile: signupCredentials.mobile,
-          password: signupCredentials.password,
-          address: signupCredentials.address,
-          date_of_birth: signupCredentials.date_of_birth,
-          country: signupCredentials.country,
-          gender: signupCredentials.gender,
-          college_name: signupCredentials.college_name,
-          uid: signupCredentials.uid,
-          cgpa: signupCredentials.cgpa,
-          degree: signupCredentials.degree
-        })
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/auth/createstudent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: signupCredentials.name,
+            email: signupCredentials.email,
+            mobile: signupCredentials.mobile,
+            password: signupCredentials.password,
+            address: signupCredentials.address,
+            date_of_birth: signupCredentials.date_of_birth,
+            country: signupCredentials.country,
+            gender: signupCredentials.gender,
+            college_name: signupCredentials.college_name,
+            uid: signupCredentials.uid,
+            cgpa: signupCredentials.cgpa,
+            degree: signupCredentials.degree,
+          }),
+        }
+      );
       // console.log("HELLO");
-      const json = await response.json()
+      const json = await response.json();
       // console.log("HELLO");
       console.log(json);
       // console.log("HELLO");
       // console.log("HELLO");
       if (json.authToken) {
         // Save the authToken and Redirect.
-        localStorage.setItem('token', json.authToken);
+        localStorage.setItem("token", json.authToken);
         navigate("/userdashboard");
         toast.success("Account Created Successfully");
-      }
-      else {
+      } else {
         toast.error("Invalid credentials");
       }
     } catch (error) {
       toast.error("Something went wrong");
     }
-  }
+  };
   // const initialFormData = {
   //   name: '',
   //   email: '',
@@ -135,56 +138,55 @@ const RegistrationForm = () => {
 
   return (
     <>
-    <div style={{'marginBottom': '50px'}} className='container'>
-      <div className='title'>
-        {/* <img src={logo}></img> */}
-        <h1>Registration Form </h1>
-      </div>
-      <div className="registration-form">
-        {/* <h1>Personal Details</h1> */}
-        {/* <hr className="horizontal-line" /> */}
-        <form>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              defaultValue={signupCredentials.name}
-              onChange={onChange}
-              placeholder="Enter your name"
-              required
-            />
-          </div>
+      <div style={{ marginBottom: "50px" }} className="container">
+        <div className="title">
+          {/* <img src={logo}></img> */}
+          <h1>Registration Form </h1>
+        </div>
+        <div className="registration-form">
+          {/* <h1>Personal Details</h1> */}
+          {/* <hr className="horizontal-line" /> */}
+          <form>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                defaultValue={signupCredentials.name}
+                onChange={onChange}
+                placeholder="Enter your name"
+                required
+              />
+            </div>
 
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              defaultValue={signupCredentials.email}
-              onChange={onChange}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                defaultValue={signupCredentials.email}
+                onChange={onChange}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              defaultValue={signupCredentials.password}
-              onChange={onChange}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                defaultValue={signupCredentials.password}
+                onChange={onChange}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
 
-
-          {/* <div>
+            {/* <div>
           <label htmlFor="age">Age</label>
           <input
             type="text"
@@ -196,18 +198,18 @@ const RegistrationForm = () => {
             required
           />
         </div> */}
-          <div>
-            <label htmlFor="mobile">Mobile Number</label>
-            <input
-              type="tel"
-              id="mobile"
-              name="mobile"
-              defaultValue={signupCredentials.mobile}
-              onChange={onChange}
-              placeholder="Enter your mobile number"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="mobile">Mobile Number</label>
+              <input
+                type="tel"
+                id="mobile"
+                name="mobile"
+                defaultValue={signupCredentials.mobile}
+                onChange={onChange}
+                placeholder="Enter your mobile number"
+                required
+              />
+            </div>
 
             <div>
               <label htmlFor="address">Address</label>
@@ -279,16 +281,15 @@ const RegistrationForm = () => {
                 </label>
               </div>
             </div>
-          <div className="form-buttons">
-
-            {/* <button className='clear' type="button" onClick={handleClear}>
+            <div className="form-buttons">
+              {/* <button className='clear' type="button" onClick={handleClear}>
                 Clear
               </button> */}
-          </div>
+            </div>
             <div>
               <label htmlFor="collegeName">College Name</label>
               <input
-                className='inputtext'
+                className="inputtext"
                 type="text"
                 id="college_name"
                 name="college_name"
@@ -337,20 +338,26 @@ const RegistrationForm = () => {
               />
             </div>
 
-          <div>
-            <label htmlFor="resume">Upload Resume</label>
-            <input type="file" id="resume" name="resume" required />
-          </div>
-          {/* <div className="form-buttons"> */}
-            <button type="submit" style={{ 'borderRadius': '10px', 'padding': '15px' }} onClick={handleSignupSubmit}>Submit</button>
+            <div>
+              <label htmlFor="resume">Upload Resume</label>
+              <input type="file" id="resume" name="resume" required />
+            </div>
+            {/* <div className="form-buttons"> */}
+            <button
+              type="submit"
+              style={{ borderRadius: "10px", padding: "15px" }}
+              onClick={handleSignupSubmit}
+            >
+              Submit
+            </button>
             {/* <button className='clear' type="button" onClick={handleClear}>
                 Clear
               </button> */}
-          {/* </div> */}
-        </form>
+            {/* </div> */}
+          </form>
+        </div>
       </div>
-    </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

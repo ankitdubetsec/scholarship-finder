@@ -76,7 +76,7 @@ function User() {
       try {
         // API call.
         const response = await fetch(
-          `https://scholarship-find.onrender.com/api/auth/getstudent`,
+          `http://localhost:5000/api/auth/getstudent`,
           {
             method: "POST",
             headers: {

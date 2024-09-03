@@ -11,7 +11,7 @@ function Card(props) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://scholarship-find.onrender.com/api/scholorship/fetchscholorship",
+          "http://localhost:5000/api/scholorship/fetchscholorship",
           {
             method: "POST",
             headers: {
