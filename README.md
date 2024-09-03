@@ -1,2 +1,3 @@
 # scholarship-finder
-live link : https://spiffy-begonia-e59252.netlify.app/
+live link : https://65ff19ae159c7f32e5cec385--sunny-pasca-b73dfd.netlify.app/
+
